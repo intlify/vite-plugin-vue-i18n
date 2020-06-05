@@ -1,0 +1,7 @@
+.*
+*.log
+*.swp
+coverage
+__snapshots__
+test
+.vscode
