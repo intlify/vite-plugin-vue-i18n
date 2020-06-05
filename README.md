@@ -5,6 +5,111 @@
 
 Vite plugin for custom blocks
 
+## :cd: Installation
+
+### NPM
+
+```sh
+$ npm i --save-dev @intlify/vite-plugin-vue-i18n
+```
+
+### YARN
+
+```sh
+$ yarn add -D @intlify/vite-plugin-vue-i18n
+```
+
+## :rocket: Usages
+
+### `i18n` custom block
+
+the below example that `examples/composable/App.vue` have `i18n` custom block:
+
+```vue
+<template>
+  <form>
+    <label>{{ t('language') }}</label>
+    <select v-model="locale">
+      <option value="en">en</option>
+      <option value="ja">ja</option>
+    </select>
+  </form>
+  <p>{{ t('hello') }}</p>
+</template>
+
+<script>
+import { useI18n } from 'vue-i18n'
+export default {
+  name: 'App',
+  setup() {
+    return { ...useI18n({
+      inheritLocale: true
+    }) }
+  }
+}
+</script>
+
+<i18n>
+{
+  "en": {
+    "language": "Language",
+    "hello": "hello, world!"
+  },
+  "ja": {
+    "language": "言語",
+    "hello": "こんにちは、世界！"
+  }
+}
+</i18n>
+
+```
+
+### Vite Config
+
+the below example that `examples/composable/vite.config.ts`:
+
+```js
+import type { UserConfig } from 'vite'
+import i18n from '@intlify/vite-plugin-vue-i18n'
+
+const config: UserConfig = {
+  vueCustomBlockTransforms: {
+    i18n
+  }
+}
+
+export default config
+
+```
+
+### Locale Messages formatting
+
+You can be used by specifying the following format in the `lang` attribute:
+
+- json (default)
+- yaml
+- json5
+
+example `yaml` foramt:
+
+```vue
+<i18n lang="yaml">
+en:
+  hello: "Hello World!"
+ja:
+  hello: "こんにちは、世界！"
+</i18n>
+```
+
+
+## :scroll: Changelog
+Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/vite-plugin-vue-i18n/blob/master/CHANGELOG.md).
+
+
+## :exclamation: Issues
+Please make sure to read the [Issue Reporting Checklist](https://github.com/inlitify/vite-plugin-vue-i18n/blob/master/.github/CONTRIBUTING.md#issue-reporting-guidelines) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
+
+
 ## :copyright: License
 
 [MIT](http://opensource.org/licenses/MIT)
