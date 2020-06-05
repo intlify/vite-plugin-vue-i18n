@@ -36,7 +36,7 @@ async function commitChangelog(current, next) {
 }
 
 module.exports = {
-  mergeStrategy: { toSameBranch: ['next'] },
+  mergeStrategy: { toSameBranch: ['master'] },
   monorepo: undefined,
   updateChangelog: false,
   beforeCommitChanges: ({ nextVersion, exec, dir }) => {
