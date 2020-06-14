@@ -4,6 +4,7 @@ import { build } from 'vite'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import i18n from '../src/index'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function bundle(fixture: string, options: Record<string, unknown> = {}) {
   const { assets } = await build({
     emitAssets: false,
