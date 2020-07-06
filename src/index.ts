@@ -1,21 +1,23 @@
 import { friendlyJSONstringify } from 'vue-i18n'
 import yaml from 'js-yaml'
 import JSON5 from 'json5'
+import type { Transform } from 'vite'
 
 import { debug as Debug } from 'debug'
 const debug = Debug('vite-plugin-vue-i18n')
 
-type Query = Record<string, string>
+type Query = Record<string, string | string[] | undefined>
+type TransformFn = Transform['transform']
 
-export default function i18n(source: string, query: Query) {
+const i18n: TransformFn = function ({ code, query }) {
   debug('vueSFCTransform: query', JSON.stringify(query))
 
   return new Promise<string>(resolve => {
-    const code = `export default Comp => {
+    const result = `export default Comp => {
   Comp.__i18n = Comp.__i18n || []
-  Comp.__i18n.push(${stringify(parse(source.trim(), query), query)})
+  Comp.__i18n.push(${stringify(parse(code.trim(), query), query)})
 }`.trim()
-    resolve(code)
+    resolve(result)
   })
 }
 
@@ -44,3 +46,5 @@ function parse(source: string, query: Query): string {
       return JSON.parse(value)
   }
 }
+
+export default i18n
