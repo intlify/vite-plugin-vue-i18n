@@ -1,7 +1,7 @@
 {
   "name": "@intlify/vite-plugin-vue-i18n",
   "description": "Vite plugin for custom blocks",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -57,7 +57,7 @@
     "ts-jest": "^26.1.0",
     "typescript": "^3.9.7",
     "typescript-eslint-language-service": "^3.0.0",
-    "vite": "1.0.0-beta.1"
+    "vite": "1.0.0-rc.4"
   },
   "engines": {
     "node": ">= 10"
