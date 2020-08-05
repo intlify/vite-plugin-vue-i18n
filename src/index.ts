@@ -39,7 +39,7 @@ function parse(source: string, query: Query): string {
   switch (lang) {
     case 'yaml':
     case 'yml':
-      return yaml.safeLoad(value)
+      return yaml.safeLoad(value) as string
     case 'json5':
       return JSON5.parse(value)
     default:

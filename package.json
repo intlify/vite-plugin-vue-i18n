@@ -26,23 +26,23 @@
   "dependencies": {
     "js-yaml": "^3.14.0",
     "json5": "^2.1.3",
-    "vue-i18n": "^9.0.0-alpha.11"
+    "vue-i18n": "^9.0.0-alpha.12"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.1",
     "@types/debug": "^4.1.5",
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^26.0.8",
     "@types/js-yaml": "^3.12.4",
     "@types/jsdom": "^16.2.3",
     "@types/json5": "^0.0.30",
     "@types/node": "^14.0.11",
-    "@typescript-eslint/eslint-plugin": "^3.1.0",
-    "@typescript-eslint/parser": "^3.1.0",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "@typescript-eslint/parser": "^3.8.0",
     "debug": "^4.1.1",
-    "eslint": "^7.1.0",
+    "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-vue": "^7.0.0-alpha.5",
+    "eslint-plugin-vue": "^7.0.0-beta.1",
     "eslint-plugin-vue-libs": "^4.0.0",
     "jest": "^26.0.1",
     "jest-puppeteer": "^4.4.0",
@@ -55,9 +55,9 @@
     "serve": "^11.3.2",
     "shipjs": "^0.19.0",
     "ts-jest": "^26.1.0",
-    "typescript": "^3.9.5",
+    "typescript": "^3.9.7",
     "typescript-eslint-language-service": "^3.0.0",
-    "vite": "1.0.0-beta.10"
+    "vite": "1.0.0-beta.1"
   },
   "engines": {
     "node": ">= 10"
@@ -78,7 +78,7 @@
     "url": "git+https://github.com/intlify/vite-plugin-vue-i18n.git"
   },
   "scripts": {
-    "build": "tsc --skipLibCheck -p .",
+    "build": "tsc -p .",
     "build:example": "yarn build && npm-run-all --parallel build:example:*",
     "build:example:legacy": "vite build -c ./examples/legacy/vite.config.ts --outDir ./examples/legacy",
     "build:example:composable": "vite build -c ./examples/composable/vite.config.ts --outDir ./examples/composable",
