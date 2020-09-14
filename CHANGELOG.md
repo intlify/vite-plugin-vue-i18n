@@ -1,4 +1,13 @@
 
+## v1.0.0-alpha.1 (2020-09-14)
+
+#### :zap: Improvement Features
+* [#10](https://github.com/intlify/vite-plugin-vue-i18n/pull/10) update deps ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 
 
 ## v0.2.0 (2020-07-06)
