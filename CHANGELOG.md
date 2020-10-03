@@ -1,4 +1,13 @@
 
+## v1.0.0-alpha.2 (2020-10-03)
+
+#### :zap: Improvement Features
+* [#12](https://github.com/intlify/vite-plugin-vue-i18n/pull/12) feat: generate typescript declarations ([@onx2](https://github.com/onx2))
+
+#### Committers: 1
+- Jeff Rooks ([@onx2](https://github.com/onx2))
+
+
 ## v1.0.0-alpha.1 (2020-09-14)
 
 #### :zap: Improvement Features
