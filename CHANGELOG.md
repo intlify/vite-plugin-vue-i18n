@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.1 (2020-10-19)
+
+#### :bug: Bug Fixes
+* [#14](https://github.com/intlify/vite-plugin-vue-i18n/pull/14) fix: cannot load vue-i18n-next ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-alpha.2 (2020-10-03)
 
 #### :zap: Improvement Features
