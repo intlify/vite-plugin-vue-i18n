@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.2 (2020-12-04)
+
+#### :star: Features
+* [#16](https://github.com/intlify/vite-plugin-vue-i18n/pull/16) feat: global attribute ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.1 (2020-10-19)
 
 #### :bug: Bug Fixes
