@@ -13,9 +13,10 @@ const i18n: TransformFn = function ({ code, query }) {
   debug('vueSFCTransform: query', JSON.stringify(query))
 
   return new Promise<string>(resolve => {
+    const variableName = query.global ? '__i18nGlobal' : '__i18n'
     const result = `export default Comp => {
-  Comp.__i18n = Comp.__i18n || []
-  Comp.__i18n.push(${stringify(parse(code.trim(), query), query)})
+  Comp.${variableName} = Comp.${variableName} || []
+  Comp.${variableName}.push(${stringify(parse(code.trim(), query), query)})
 }`.trim()
     resolve(result)
   })

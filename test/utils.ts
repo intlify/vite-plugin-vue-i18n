@@ -6,7 +6,7 @@ import i18n from '../src/index'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function bundle(fixture: string, options: Record<string, unknown> = {}) {
-  const { assets } = await build({
+  const results = await build({
     emitAssets: false,
     emitIndex: false,
     write: false,
@@ -26,7 +26,7 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
       i18n
     }
   })
-  return { code: assets[0].code }
+  return { code: results[0].assets[0].code }
 }
 
 export async function bundleAndRun(

@@ -4,8 +4,7 @@ import App from './App.vue'
 
 const i18n = createI18n({
   legacy: false,
-  locale: 'ja',
-  messages: {}
+  locale: 'ja'
 })
 
 const app = createApp(App)
