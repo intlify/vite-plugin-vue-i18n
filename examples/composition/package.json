@@ -1,0 +1,19 @@
+{
+  "name": "composition",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "^3.0.4",
+    "vue-i18n": "^9.0.0-beta.15"
+  },
+  "devDependencies": {
+    "vite": "1.0.0-rc.13",
+    "@intlify/vite-plugin-vue-i18n": "link:../..",
+    "typescript": "^4.1.2",
+    "@vue/compiler-sfc": "^3.0.4"
+  }
+}
