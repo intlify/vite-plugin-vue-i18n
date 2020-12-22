@@ -69,20 +69,39 @@ export default {
 
 ### Vite Config
 
-the below example that `examples/composable/vite.config.ts`:
+the below example that `examples/composition/vite.config.ts`:
 
-```js
+```ts
 import type { UserConfig } from 'vite'
-import i18n from '@intlify/vite-plugin-vue-i18n'
+import { transformI18n } from '@intlify/vite-plugin-vue-i18n'
 
 const config: UserConfig = {
   vueCustomBlockTransforms: {
-    i18n
+    i18n: transformI18n()
   }
 }
 
 export default config
+```
 
+
+### `forceStringify` options
+
+Whether pre-compile number and boolean values as message functions that return the string value, default `false`
+
+```ts
+import type { UserConfig } from 'vite'
+import { transformI18n } from '@intlify/vite-plugin-vue-i18n'
+
+const config: UserConfig = {
+  vueCustomBlockTransforms: {
+    i18n: transformI18n({
+     forceStringify: true
+    })
+  }
+}
+
+export default config
 ```
 
 ### Locale Messages formatting
