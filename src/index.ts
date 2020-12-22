@@ -1,51 +1,78 @@
-import { friendlyJSONstringify } from 'vue-i18n'
-import yaml from 'js-yaml'
-import JSON5 from 'json5'
-import type { Transform } from 'vite'
-
+import { isEmptyObject, isString } from '@intlify/shared'
+import { generateJSON, generateYAML } from './generator'
 import { debug as Debug } from 'debug'
+
+import type { CodeGenOptions, DevEnv } from './generator/codegen'
+import type { Transform } from 'vite'
+import type { TransformContext } from 'vite/dist/node/transform'
+
 const debug = Debug('vite-plugin-vue-i18n')
 
-type Query = Record<string, string | string[] | undefined>
+export type VitePluginVueI18nOptions = {
+  forceStringify?: boolean
+}
 type TransformFn = Transform['transform']
 
-const i18n: TransformFn = function ({ code, query }) {
-  debug('vueSFCTransform: query', JSON.stringify(query))
+function transformI18n(
+  options: VitePluginVueI18nOptions = { forceStringify: false }
+): TransformFn {
+  return (context: TransformContext) => {
+    const { path, code: source, query } = context
+    debug('vueSFCTransform: path', path)
+    debug('vueSFCTransform: query', JSON.stringify(query))
 
-  return new Promise<string>(resolve => {
-    const variableName = query.global ? '__i18nGlobal' : '__i18n'
-    const result = `export default Comp => {
-  Comp.${variableName} = Comp.${variableName} || []
-  Comp.${variableName}.push(${stringify(parse(code.trim(), query), query)})
-}`.trim()
-    resolve(result)
-  })
+    const parseOptions = getOptions(
+      context,
+      options.forceStringify
+    ) as CodeGenOptions
+    const langInfo = !isEmptyObject(query)
+      ? isString(query.lang)
+        ? query.lang
+        : 'json'
+      : 'json'
+
+    const generate = /json5?/.test(langInfo) ? generateJSON : generateYAML
+    const { code } = generate(source, parseOptions)
+    // console.log('code', code)
+
+    // TODO: error handling
+    return new Promise<string>(resolve => {
+      resolve(code)
+    })
+  }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function stringify(data: any, query: Query): string {
-  const { locale } = query
-  if (locale) {
-    return friendlyJSONstringify(
-      Object.assign({}, { [locale as string]: data })
-    )
+function getOptions(
+  context: TransformContext,
+  forceStringify = false
+): Record<string, unknown> {
+  const { path: filename, query, isBuild } = context
+  const mode: DevEnv = isBuild ? 'production' : 'development'
+
+  const baseOptions = {
+    filename,
+    forceStringify,
+    env: mode as DevEnv,
+    onWarn: (msg: string): void => {
+      console.warn(`[vite-plugin-vue-i18n]: ${filename} ${msg}`)
+    },
+    onError: (msg: string): void => {
+      console.error(`[vite-plugin-vue-i18n]: ${filename} ${msg}`)
+    }
+  }
+
+  if (!isEmptyObject(query)) {
+    return Object.assign(baseOptions, {
+      type: 'sfc',
+      locale: isString(query.locale) ? query.locale : '',
+      isGlobal: query.global != null
+    })
   } else {
-    return friendlyJSONstringify(data)
+    return Object.assign(baseOptions, {
+      type: 'plain',
+      isGlobal: false
+    })
   }
 }
 
-function parse(source: string, query: Query): string {
-  const value = source.trim()
-  const { lang } = query
-  switch (lang) {
-    case 'yaml':
-    case 'yml':
-      return yaml.safeLoad(value) as string
-    case 'json5':
-      return JSON5.parse(value)
-    default:
-      return JSON.parse(value)
-  }
-}
-
-export default i18n
+export { transformI18n }
