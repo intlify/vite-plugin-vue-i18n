@@ -2,7 +2,7 @@ import path from 'path'
 import alias from '@rollup/plugin-alias'
 import { build } from 'vite'
 import { JSDOM, VirtualConsole } from 'jsdom'
-import i18n from '../src/index'
+import { transformI18n } from '../src/index'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function bundle(fixture: string, options: Record<string, unknown> = {}) {
@@ -23,7 +23,7 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
       ]
     },
     vueCustomBlockTransforms: {
-      i18n
+      i18n: transformI18n()
     }
   })
   return { code: results[0].assets[0].code }
