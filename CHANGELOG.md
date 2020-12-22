@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.3 (2020-12-22)
+
+#### :star: Features
+* [#20](https://github.com/intlify/vite-plugin-vue-i18n/pull/20) feat: custom block pre compilation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.2 (2020-12-04)
 
 #### :star: Features
