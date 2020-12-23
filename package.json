@@ -27,6 +27,7 @@
     "@intlify/core-base": "^9.0.0-beta.15",
     "@intlify/message-compiler": "^9.0.0-beta.15",
     "@intlify/shared": "^9.0.0-beta.15",
+    "@rollup/pluginutils": "^4.1.0",
     "jsonc-eslint-parser": "^0.6.0",
     "yaml-eslint-parser": "^0.2.0"
   },

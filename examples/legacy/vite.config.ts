@@ -1,10 +1,14 @@
+import path from 'path'
+import { pluginI18n } from '@intlify/vite-plugin-vue-i18n'
+
 import type { UserConfig } from 'vite'
-import { transformI18n } from '@intlify/vite-plugin-vue-i18n'
 
 const config: UserConfig = {
-  vueCustomBlockTransforms: {
-    i18n: transformI18n()
-  }
+  plugins: [
+    pluginI18n({
+      include: path.resolve(__dirname, './locales/**')
+    })
+  ]
 }
 
 export default config
