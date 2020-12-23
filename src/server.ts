@@ -12,6 +12,7 @@ export function serverPluginResource(
 ): ServerPlugin {
   return ({ app }): void => {
     app.use(async (ctx, next) => {
+      debug('type before:', ctx.type)
       await next()
       if (
         /\.(json5?|ya?ml)/.test(ctx.path) &&
@@ -19,7 +20,7 @@ export function serverPluginResource(
         ctx.body
       ) {
         const b = await readBody(ctx.body)
-        debug('path', ctx.path)
+        debug('type after:', ctx.type)
         ctx.type = 'js'
         ctx.body = b
       }
