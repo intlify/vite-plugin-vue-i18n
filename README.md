@@ -43,7 +43,7 @@ const config: UserConfig = {
   plugins: [
     pluginI18n({
       // you need to set i18n resource including paths !
-      include: path.resolve(__dirname, './locales/**')
+      include: path.resolve(__dirname, './path/to/locales/**')
     })
   ]
 }
@@ -131,7 +131,7 @@ const config: UserConfig = {
   plugins: [
     pluginI18n({
       forceStringify: true,
-      include: path.resolve(__dirname, './locales/**')
+      include: path.resolve(__dirname, './path/to/locales/**')
     })
   ]
 }
