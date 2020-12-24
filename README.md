@@ -43,13 +43,12 @@ const config: UserConfig = {
   plugins: [
     pluginI18n({
       // you need to set i18n resource including paths !
-      include: path.resolve(__dirname, './path/to/locales/**')
+      include: path.resolve(__dirname, './path/to/src/locales/**')
     })
   ]
 }
 
 export default config
-
 ```
 
 ### `i18n` custom block
@@ -131,7 +130,7 @@ const config: UserConfig = {
   plugins: [
     pluginI18n({
       forceStringify: true,
-      include: path.resolve(__dirname, './path/to/locales/**')
+      include: path.resolve(__dirname, './path/to/src/locales/**')
     })
   ]
 }
