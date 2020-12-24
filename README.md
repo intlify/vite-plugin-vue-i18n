@@ -3,7 +3,7 @@
 ![Test](https://github.com/intlify/vite-plugin-vue-i18n/workflows/Test/badge.svg)
 [![npm](https://img.shields.io/npm/v/@intlify/vite-plugin-vue-i18n.svg)](https://www.npmjs.com/package/@intlify/vite-plugin-vue-i18n)
 
-Vite plugin for custom blocks
+Vite plugin for i18n resource pre-compilation and custom blocks
 
 ## :cd: Installation
 
@@ -21,9 +21,39 @@ $ yarn add -D @intlify/vite-plugin-vue-i18n
 
 ## :rocket: Usages
 
+### i18n resource pre-compilation
+
+Since vue-i18n@v9.0, The locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
+
+However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, vue-i18n@v9.0 and later offer a full version that includes compiler and runtime, and a runtime only version.
+
+If you are using the runtime version, you will need to compile before importing locale messages by managing them in a file such as `.json`.
+
+#### Vite Config
+
+the below example that `examples/composition/vite.config.ts`:
+
+```ts
+import path from 'path'
+import { pluginI18n } from '@intlify/vite-plugin-vue-i18n'
+
+import type { UserConfig } from 'vite'
+
+const config: UserConfig = {
+  plugins: [
+    pluginI18n({
+      // you need to set i18n resource including paths !
+      include: path.resolve(__dirname, './path/to/src/locales/**')
+    })
+  ]
+}
+
+export default config
+```
+
 ### `i18n` custom block
 
-the below example that `examples/composable/App.vue` have `i18n` custom block:
+the below example that `examples/composition/App.vue` have `i18n` custom block:
 
 ```vue
 <template>
@@ -67,43 +97,6 @@ export default {
 
 ```
 
-### Vite Config
-
-the below example that `examples/composition/vite.config.ts`:
-
-```ts
-import type { UserConfig } from 'vite'
-import { transformI18n } from '@intlify/vite-plugin-vue-i18n'
-
-const config: UserConfig = {
-  vueCustomBlockTransforms: {
-    i18n: transformI18n()
-  }
-}
-
-export default config
-```
-
-
-### `forceStringify` options
-
-Whether pre-compile number and boolean values as message functions that return the string value, default `false`
-
-```ts
-import type { UserConfig } from 'vite'
-import { transformI18n } from '@intlify/vite-plugin-vue-i18n'
-
-const config: UserConfig = {
-  vueCustomBlockTransforms: {
-    i18n: transformI18n({
-     forceStringify: true
-    })
-  }
-}
-
-export default config
-```
-
 ### Locale Messages formatting
 
 You can be used by specifying the following format in the `lang` attribute:
@@ -121,6 +114,28 @@ en:
 ja:
   hello: "こんにちは、世界！"
 </i18n>
+```
+
+### `forceStringify` options
+
+Whether pre-compile number and boolean values as message functions that return the string value, default `false`
+
+```ts
+import path from 'path'
+import { pluginI18n } from '@intlify/vite-plugin-vue-i18n'
+
+import type { UserConfig } from 'vite'
+
+const config: UserConfig = {
+  plugins: [
+    pluginI18n({
+      forceStringify: true,
+      include: path.resolve(__dirname, './path/to/src/locales/**')
+    })
+  ]
+}
+
+export default config
 ```
 
 

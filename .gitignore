@@ -6,3 +6,4 @@ lib
 *.swp
 *~
 .vscode
+examples/**/dist

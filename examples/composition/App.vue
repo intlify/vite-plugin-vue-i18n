@@ -7,17 +7,23 @@
     </select>
   </form>
   <p>{{ t('hello') }}</p>
+  <Banana />
 </template>
 
 <script>
 import { useI18n } from 'vue-i18n'
+import Banana from './Banana.vue'
+
 export default {
   name: 'App',
+  components: {
+    Banana
+  },
   setup() {
     const { t, locale } = useI18n({
-      inheritLocale: true
+      inheritLocale: true,
+      useScope: 'local'
     })
-
     return { t, locale }
   }
 }

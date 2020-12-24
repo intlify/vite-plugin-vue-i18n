@@ -1,30 +1,33 @@
+import { isBoolean } from '@intlify/shared'
 import path from 'path'
 import alias from '@rollup/plugin-alias'
 import { build } from 'vite'
 import { JSDOM, VirtualConsole } from 'jsdom'
-import { transformI18n } from '../src/index'
+import { pluginI18n } from '../src/index'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function bundle(fixture: string, options: Record<string, unknown> = {}) {
+  const input = (options.input as string) || './fixtures/entry.ts'
+  const target = (options.target as string) || './fixtures'
+  const include = (options.include as string[]) || []
+  const silent = isBoolean(options.silent) ? options.silent : true
   const results = await build({
     emitAssets: false,
     emitIndex: false,
     write: false,
     minify: false,
-    silent: true,
+    silent,
+    mode: 'development',
     rollupInputOptions: {
-      input: path.resolve(__dirname, './fixtures/entry.ts'),
+      input: path.resolve(__dirname, input),
       plugins: [
         alias({
           entries: {
-            '~target': path.resolve(__dirname, './fixtures', fixture)
+            '~target': path.resolve(__dirname, target, fixture)
           }
         })
       ]
     },
-    vueCustomBlockTransforms: {
-      i18n: transformI18n()
-    }
+    ...pluginI18n({ include })
   })
   return { code: results[0].assets[0].code }
 }
