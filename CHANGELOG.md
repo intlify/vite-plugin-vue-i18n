@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.4 (2020-12-24)
+
+#### :star: Features
+* [#23](https://github.com/intlify/vite-plugin-vue-i18n/pull/23) support i18n resource pre compilation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.3 (2020-12-22)
 
 #### :star: Features
