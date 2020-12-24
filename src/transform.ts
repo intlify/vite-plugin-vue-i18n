@@ -9,7 +9,6 @@ import type { Transform } from 'vite'
 import type { TransformContext } from 'vite/dist/node/transform'
 import type { CodeGenOptions, DevEnv } from './generator/codegen'
 import type { VitePluginVueI18nOptions } from './options'
-import { resolveBareModuleRequest } from 'vite/dist/node/resolver'
 
 const debug = Debug('vite-plugin-vue-i18n:transform')
 
@@ -47,12 +46,6 @@ function transform(
     } else {
       langInfo = path.parse(_path).ext
     }
-    // const langInfo = isCustomBlock(ctx)
-    //   ? isString(query.lang)
-    //     ? query.lang
-    //     : 'json'
-    //   : path.parse(_path).ext
-    // debug('langInfo', langInfo)
 
     // NOTE:
     // `.json` is handled default in vite, and it's transformed to JS object.
