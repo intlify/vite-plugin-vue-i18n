@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.5 (2020-12-31)
+
+#### :zap: Improvement Features
+* [#25](https://github.com/intlify/vite-plugin-vue-i18n/pull/25) improvement: use @intlify/cli internal API ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.4 (2020-12-24)
 
 #### :star: Features
