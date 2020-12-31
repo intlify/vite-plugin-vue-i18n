@@ -10,7 +10,6 @@ const options = {
 test('json resource', async () => {
   const { module } = await bundleAndRun('ja.json', options)
   const fn = module.message
-  console.log('fdsfsf', module)
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })

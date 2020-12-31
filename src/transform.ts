@@ -2,12 +2,12 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { isEmptyObject, isString } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
-import { generateJSON, generateYAML } from './generator'
+import { generateJSON, generateYAML } from '@intlify/cli'
 import { debug as Debug } from 'debug'
 
 import type { Transform } from 'vite'
 import type { TransformContext } from 'vite/dist/node/transform'
-import type { CodeGenOptions, DevEnv } from './generator/codegen'
+import type { CodeGenOptions, DevEnv } from '@intlify/cli'
 import type { VitePluginVueI18nOptions } from './options'
 
 const debug = Debug('vite-plugin-vue-i18n:transform')
