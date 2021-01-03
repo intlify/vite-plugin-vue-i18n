@@ -4,90 +4,87 @@ import { isEmptyObject, isString } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import { generateJSON, generateYAML } from '@intlify/cli'
 import { debug as Debug } from 'debug'
+import { parseVueRequest } from './query'
 
-import type { Transform } from 'vite'
-import type { TransformContext } from 'vite/dist/node/transform'
 import type { CodeGenOptions, DevEnv } from '@intlify/cli'
 import type { VitePluginVueI18nOptions } from './options'
 
 const debug = Debug('vite-plugin-vue-i18n:transform')
 
-type TransformFn = Transform['transform']
-
-function transform(
+export function transform(
   options: VitePluginVueI18nOptions = { forceStringify: false }
-): TransformFn {
-  return async (ctx: TransformContext) => {
-    const { path: _path, code: source, query } = ctx
-    debug('transform: path', _path)
-    debug('transform: query', JSON.stringify(query))
+) {
+  debug('transform NODE_ENV', process.env.NODE_ENV)
+  const filter = createFilter(options.include)
+  const isProduction = process.env.NODE_ENV === 'production'
 
-    const parseOptions = getOptions(
-      ctx,
-      options.forceStringify
-    ) as CodeGenOptions
+  return {
+    async transform(code: string, id: string) {
+      const { filename, query } = parseVueRequest(id)
+      debug('transform', id, code, JSON.stringify(query))
 
-    let langInfo = 'json'
-    if (isCustomBlock(ctx)) {
-      if ('src' in query) {
-        if (isString(query.lang)) {
-          langInfo = query.lang === 'i18n' ? 'json' : query.lang
-        } else {
+      const parseOptions = getOptions(
+        filename,
+        isProduction,
+        query as Record<string, unknown>,
+        options.forceStringify
+      ) as CodeGenOptions
+      debug('parseOptions', parseOptions)
+
+      let langInfo = 'json'
+      if (!query.vue) {
+        if (/\.(json5?|ya?ml)$/.test(id) && filter(id)) {
+          langInfo = path.parse(filename).ext
           // NOTE:
-          //  if it's imported with `src` attr, delegate next pipeline.
-          //  (If imported with custom blocks, the request with the same query will be called again)
-          return new Promise<string>(resolve => resolve(source))
+          // `.json` is handled default in vite, and it's transformed to JS object.
+          let _source = code
+          if (langInfo === '.json') {
+            _source = await getRawJSON(id)
+          }
+          const generate = /\.?json5?/.test(langInfo)
+            ? generateJSON
+            : generateYAML
+          const { code: generatedCode } = generate(_source, parseOptions)
+          debug('generated code', generatedCode)
+          // TODO: error handling & sourcempa
+          return Promise.resolve(generatedCode)
+        } else {
+          return Promise.resolve(code)
         }
       } else {
-        if (isString(query.lang)) {
-          langInfo = query.lang
+        // for Vue SFC
+        if (isCustomBlock(query as Record<string, unknown>)) {
+          if ('src' in query) {
+            if (isString(query.lang)) {
+              langInfo = query.lang === 'i18n' ? 'json' : query.lang
+            }
+          } else {
+            if (isString(query.lang)) {
+              langInfo = query.lang
+            }
+          }
         }
+        const generate = /\.?json5?/.test(langInfo)
+          ? generateJSON
+          : generateYAML
+        const { code: generatedCode } = generate(code, parseOptions)
+        debug('generated code', generatedCode)
+        // TODO: error handling & sourcempa
+        return Promise.resolve(generatedCode)
       }
-    } else {
-      langInfo = path.parse(_path).ext
     }
-
-    // NOTE:
-    // `.json` is handled default in vite, and it's transformed to JS object.
-    let _source = source
-    if (!isCustomBlock(ctx) && langInfo === '.json') {
-      _source = await getRawJSON(_path)
-    }
-
-    const generate = /\.?json5?/.test(langInfo) ? generateJSON : generateYAML
-    const { code } = generate(_source, parseOptions)
-    debug('code', code)
-
-    // TODO: error handling
-    return new Promise<string>(resolve => {
-      resolve(code)
-    })
   }
-}
-
-function transformResource(options: VitePluginVueI18nOptions = {}): Transform {
-  const filter = createFilter(options.include)
-  const _transform: Transform = {
-    test: ({ id, path, query }): boolean => {
-      debug('test id:', id)
-      debug('test path:', path)
-      debug('test query:', query)
-      return /\.(json5?|ya?ml)$/.test(path) && filter(path)
-    },
-    transform: transform(options)
-  }
-
-  return _transform
 }
 
 async function getRawJSON(path: string): Promise<string> {
   return fs.readFile(path, { encoding: 'utf-8' })
 }
 
-function isCustomBlock({ query }: TransformContext): boolean {
+function isCustomBlock(query: Record<string, unknown>): boolean {
   // NOTE: should be more improvement. difference query type and blocktype in some environment ...
   return (
     !isEmptyObject(query) &&
+    'vue' in query &&
     (query['type'] === 'custom' ||
       query['type'] === 'i18n' ||
       query['blockType'] === 'i18n')
@@ -95,12 +92,12 @@ function isCustomBlock({ query }: TransformContext): boolean {
 }
 
 function getOptions(
-  ctx: TransformContext,
+  filename: string,
+  isProduction: boolean,
+  query: Record<string, unknown>,
   forceStringify = false
 ): Record<string, unknown> {
-  const { path: filename, query, isBuild } = ctx
-  const mode: DevEnv = isBuild ? 'production' : 'development'
-  debug('getOptions', ctx)
+  const mode: DevEnv = isProduction ? 'production' : 'development'
 
   const baseOptions = {
     filename,
@@ -114,7 +111,7 @@ function getOptions(
     }
   }
 
-  if (isCustomBlock(ctx)) {
+  if (isCustomBlock(query)) {
     return Object.assign(baseOptions, {
       type: 'sfc',
       locale: isString(query.locale) ? query.locale : '',
@@ -127,5 +124,3 @@ function getOptions(
     })
   }
 }
-
-export { transform as transformCustomBlock, transformResource }
