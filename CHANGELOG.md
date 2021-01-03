@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.6 (2021-01-03)
+
+#### :star: Features
+* [#27](https://github.com/intlify/vite-plugin-vue-i18n/pull/27) feat: support vite 2 ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.5 (2020-12-31)
 
 #### :zap: Improvement Features
