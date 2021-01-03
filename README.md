@@ -35,12 +35,14 @@ the below example that `examples/composition/vite.config.ts`:
 
 ```ts
 import path from 'path'
+import vue from '@vitejs/plugin-vue'
 import { pluginI18n } from '@intlify/vite-plugin-vue-i18n'
 
 import type { UserConfig } from 'vite'
 
 const config: UserConfig = {
   plugins: [
+    vue(), // you need to install `@vitejs/plugin-vue`
     pluginI18n({
       // you need to set i18n resource including paths !
       include: path.resolve(__dirname, './path/to/src/locales/**')
@@ -122,12 +124,14 @@ Whether pre-compile number and boolean values as message functions that return t
 
 ```ts
 import path from 'path'
+import vue from '@vitejs/plugin-vue'
 import { pluginI18n } from '@intlify/vite-plugin-vue-i18n'
 
 import type { UserConfig } from 'vite'
 
 const config: UserConfig = {
   plugins: [
+    vue(),
     pluginI18n({
       forceStringify: true,
       include: path.resolve(__dirname, './path/to/src/locales/**')
