@@ -104,3 +104,11 @@ test('global', async () => {
   expect(g.locale).toEqual('')
   expect(g.resource.en.hello(createMessageContext())).toEqual('hello global!')
 })
+
+test('fully-block', async () => {
+  const { module } = await bundleAndRun('fully-block.vue')
+  expect(module.__i18n).toMatchSnapshot()
+  const i18n = module.__i18n.pop()
+  expect(i18n.locale).toEqual('')
+  expect(i18n.resource.en.hello(createMessageContext())).toEqual('hello world!')
+})
