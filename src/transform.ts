@@ -63,14 +63,17 @@ export function transform(
               langInfo = query.lang
             }
           }
+          const generate = /\.?json5?/.test(langInfo)
+            ? generateJSON
+            : generateYAML
+          const { code: generatedCode } = generate(code, parseOptions)
+          debug('generated code', generatedCode)
+          // TODO: error handling & sourcempa
+          return Promise.resolve(generatedCode)
+        } else {
+          debug('dsfdsfsd', code)
+          return Promise.resolve(code)
         }
-        const generate = /\.?json5?/.test(langInfo)
-          ? generateJSON
-          : generateYAML
-        const { code: generatedCode } = generate(code, parseOptions)
-        debug('generated code', generatedCode)
-        // TODO: error handling & sourcempa
-        return Promise.resolve(generatedCode)
       }
     }
   }

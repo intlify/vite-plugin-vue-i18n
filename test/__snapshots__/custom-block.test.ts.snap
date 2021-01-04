@@ -13,6 +13,19 @@ Array [
 ]
 `;
 
+exports[`fully-block 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
 exports[`global 1`] = `
 Array [
   Object {

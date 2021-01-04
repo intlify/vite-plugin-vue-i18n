@@ -17,7 +17,8 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
   const result = await build({
     logLevel: silent,
     alias: {
-      '~target': path.resolve(__dirname, target, fixture)
+      '~target': path.resolve(__dirname, target, fixture),
+      vue: 'vue/dist/vue.runtime.esm-browser.js'
     },
     plugins: [vue(), pluginI18n({ include })],
     build: {
