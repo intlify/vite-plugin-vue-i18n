@@ -34,7 +34,7 @@ export function pluginI18n(
 
       const parseOptions = getOptions(
         filename,
-        config != null ? (config.mode as DevEnv) : 'development',
+        config != null ? config.isProduction : false,
         query as Record<string, unknown>,
         options.forceStringify
       ) as CodeGenOptions
@@ -104,10 +104,12 @@ function isCustomBlock(query: Record<string, unknown>): boolean {
 
 function getOptions(
   filename: string,
-  mode: DevEnv,
+  isProduction: boolean,
   query: Record<string, unknown>,
   forceStringify = false
 ): Record<string, unknown> {
+  const mode: DevEnv = isProduction ? 'production' : 'production'
+
   const baseOptions = {
     filename,
     forceStringify,
