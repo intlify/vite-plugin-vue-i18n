@@ -1,4 +1,16 @@
 
+## v1.0.0-beta.7 (2021-01-04)
+
+#### :bug: Bug Fixes
+* [#31](https://github.com/intlify/vite-plugin-vue-i18n/pull/31) fix: cannot transform other blocks ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improvement Features
+* [#32](https://github.com/intlify/vite-plugin-vue-i18n/pull/32) improvement: pre-compilation with vite mode option ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.6 (2021-01-03)
 
 #### :star: Features

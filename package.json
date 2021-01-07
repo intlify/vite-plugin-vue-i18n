@@ -1,7 +1,7 @@
 {
   "name": "@intlify/vite-plugin-vue-i18n",
   "description": "Vite plugin for i18n resource pre-compilation and custom blocks",
-  "version": "1.0.0-beta.6",
+  "version": "1.0.0-beta.7",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -57,7 +57,7 @@
     "ts-jest": "^26.4.0",
     "typescript": "^4.1.3",
     "typescript-eslint-language-service": "^4.1.2",
-    "vite": "2.0.0-beta.4",
+    "vite": "2.0.0-beta.10",
     "vue": "^3.0.5",
     "vue-i18n": "^9.0.0-beta.18"
   },
