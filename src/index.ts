@@ -1,4 +1,3 @@
-import { promises as fs } from 'fs'
 import path from 'path'
 import { isEmptyObject, isString } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
@@ -26,8 +25,30 @@ export function pluginI18n(
     name: 'vite-plugin-vue-i18n',
 
     configResolved(_config: ResolvedConfig) {
+      // store config
       config = _config
-      debug('configResolved', config)
+
+      // json transform handling
+      const jsonPlugin = config.plugins.find(p => p.name === 'json')
+      if (jsonPlugin) {
+        const orgTransform = jsonPlugin.transform // backup @rollup/plugin-json
+        jsonPlugin.transform = async function (code: string, id: string) {
+          if (!/\.json$/.test(id)) {
+            return null
+          }
+          if (filter(id)) {
+            const map = this.getCombinedSourcemap()
+            debug('override json plugin', code, map)
+            return Promise.resolve({
+              code,
+              map
+            })
+          } else {
+            debug('org json plugin')
+            return orgTransform!.apply(this, [code, id])
+          }
+        }
+      }
     },
 
     async transform(code: string, id: string) {
@@ -53,13 +74,6 @@ export function pluginI18n(
             inSourceMap = (map as unknown) as RawSourceMap
           }
           langInfo = path.parse(filename).ext
-          // NOTE:
-          // `.json` is handled default in vite, and it's transformed to JS object.
-          let _source = code
-          if (langInfo === '.json') {
-            _source = await getRawJSON(id)
-            console.log('raw json', _source)
-          }
 
           const generate = /\.?json5?/.test(langInfo)
             ? generateJSON
@@ -75,17 +89,20 @@ export function pluginI18n(
           ) as CodeGenOptions
           debug('parseOptions', parseOptions)
 
-          const { code: generatedCode, map } = generate(_source, parseOptions)
+          const { code: generatedCode, map } = generate(code, parseOptions)
           debug('generated', map)
 
           // TODO: error handling & sourcempa
           return Promise.resolve({
             code: generatedCode,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            map: (sourceMap ? map : inSourceMap) as any
+            map: (sourceMap ? map : { mappings: '' }) as any
           })
         } else {
-          return Promise.resolve(code)
+          return Promise.resolve({
+            code,
+            map: sourceMap ? this.getCombinedSourcemap() : { mappings: '' }
+          })
         }
       } else {
         // for Vue SFC
@@ -132,18 +149,17 @@ export function pluginI18n(
           return Promise.resolve({
             code: generatedCode,
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            map: (sourceMap ? map : inSourceMap) as any
+            map: (sourceMap ? map : { mappings: '' }) as any
           })
         } else {
-          return Promise.resolve(code)
+          return Promise.resolve({
+            code,
+            map: sourceMap ? this.getCombinedSourcemap() : { mappings: '' }
+          })
         }
       }
     }
   }
-}
-
-async function getRawJSON(path: string): Promise<string> {
-  return fs.readFile(path, { encoding: 'utf-8' })
 }
 
 function isCustomBlock(query: Record<string, unknown>): boolean {

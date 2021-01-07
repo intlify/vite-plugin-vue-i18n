@@ -3,7 +3,12 @@
 ![Test](https://github.com/intlify/vite-plugin-vue-i18n/workflows/Test/badge.svg)
 [![npm](https://img.shields.io/npm/v/@intlify/vite-plugin-vue-i18n.svg)](https://www.npmjs.com/package/@intlify/vite-plugin-vue-i18n)
 
-Vite plugin for i18n resource pre-compilation and custom blocks
+Vite plugin for Vue I18n
+
+
+## :star: Features
+- i18n resources pre-compilation
+- i18n custom block
 
 ## :cd: Installation
 
@@ -19,9 +24,10 @@ $ npm i --save-dev @intlify/vite-plugin-vue-i18n
 $ yarn add -D @intlify/vite-plugin-vue-i18n
 ```
 
-## :rocket: Usages
 
-### i18n resource pre-compilation
+## :rocket: Usage
+
+### i18n resources pre-compilation
 
 Since vue-i18n@v9.0, The locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
 
@@ -35,15 +41,15 @@ the below example that `examples/composition/vite.config.ts`:
 
 ```ts
 import path from 'path'
-import vue from '@vitejs/plugin-vue'
-import { pluginI18n } from '@intlify/vite-plugin-vue-i18n'
+import Vue from '@vitejs/plugin-vue'
+import { VueI18n } from '@intlify/vite-plugin-vue-i18n'
 
 import type { UserConfig } from 'vite'
 
 const config: UserConfig = {
   plugins: [
-    vue(), // you need to install `@vitejs/plugin-vue`
-    pluginI18n({
+    Vue(), // you need to install `@vitejs/plugin-vue`
+    VueI18n({
       // you need to set i18n resource including paths !
       include: path.resolve(__dirname, './path/to/src/locales/**')
     })
@@ -53,9 +59,9 @@ const config: UserConfig = {
 export default config
 ```
 
-### `i18n` custom block
+### i18n custom block
 
-the below example that `examples/composition/App.vue` have `i18n` custom block:
+the below example that `examples/composition/App.vue` have i18n custom block:
 
 ```vue
 <template>
@@ -96,7 +102,6 @@ export default {
   }
 }
 </i18n>
-
 ```
 
 ### Locale Messages formatting
@@ -118,30 +123,53 @@ ja:
 </i18n>
 ```
 
-### `forceStringify` options
 
-Whether pre-compile number and boolean values as message functions that return the string value, default `false`
+## :wrench: Options
 
-```ts
-import path from 'path'
-import vue from '@vitejs/plugin-vue'
-import { pluginI18n } from '@intlify/vite-plugin-vue-i18n'
+### `include`
 
-import type { UserConfig } from 'vite'
+- **Type:** `string | string[] | undefined`
+- **Default:** `undefined`
 
-const config: UserConfig = {
-  plugins: [
-    vue(),
-    pluginI18n({
-      forceStringify: true,
-      include: path.resolve(__dirname, './path/to/src/locales/**')
-    })
-  ]
-}
+  A [minimatch](https://github.com/isaacs/minimatch) pattern, or array of patterns, you can specify a path to pre-compile i18n resources files. The extensions of i18n resources to be precompiled are as follows:
 
-export default config
-```
+  ```
+  - `json`
+  - `json5`
+  - `yaml`
+  - `yml`
+  ```
 
+  Note `json` resources matches this option, it will be handled **before the internal json plugin of Vite, and will not be processed afterwards**, else the option doesn't match, the Vite side will handle.
+
+### `forceStringify`
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+  Whether pre-compile number and boolean values as message functions that return the string value.
+
+  for example, the following json resources:
+
+  ```json
+  {
+    "trueValue": true,
+    "falseValue": false,
+    "nullValue": null,
+    "numberValue": 1
+  }
+  ```
+
+  after pre-compiled (development):
+
+  ```js
+  export default {
+    "trueValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["true"])};fn.source="true";return fn;})(),
+    "falseValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["false"])};fn.source="false";return fn;})(),
+    "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
+    "numberValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})()
+  }
+  ```
 
 ## :scroll: Changelog
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/vite-plugin-vue-i18n/blob/master/CHANGELOG.md).
