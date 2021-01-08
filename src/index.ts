@@ -24,8 +24,30 @@ export function pluginI18n(
     name: 'vite-plugin-vue-i18n',
 
     configResolved(_config: ResolvedConfig) {
+      // store config
       config = _config
-      debug('configResolved', config)
+
+      // json transform handling
+      const jsonPlugin = config.plugins.find(p => p.name === 'json')
+      if (jsonPlugin) {
+        const orgTransform = jsonPlugin.transform // backup @rollup/plugin-json
+        jsonPlugin.transform = async function (code: string, id: string) {
+          if (!/\.json$/.test(id)) {
+            return null
+          }
+          if (filter(id)) {
+            const map = this.getCombinedSourcemap()
+            debug('override json plugin', code, map)
+            return Promise.resolve({
+              code,
+              map
+            })
+          } else {
+            debug('org json plugin')
+            return orgTransform!.apply(this, [code, id])
+          }
+        }
+      }
     },
 
     async transform(code: string, id: string) {
