@@ -9,6 +9,7 @@ Vite plugin for Vue I18n
 ## :star: Features
 - i18n resources pre-compilation
 - i18n custom block
+- Bundling optimizations
 
 ## :cd: Installation
 
@@ -23,6 +24,10 @@ $ npm i --save-dev @intlify/vite-plugin-vue-i18n
 ```sh
 $ yarn add -D @intlify/vite-plugin-vue-i18n
 ```
+
+## :warning: Notice
+
+When this plugin is installed, Vue I18n can only use the Composition API, and if you want to use the Legacy API, you need to set the `compositionOnly` option to `false`.
 
 
 ## :rocket: Usage
@@ -122,6 +127,14 @@ ja:
 </i18n>
 ```
 
+### Bundling optimizations
+
+vite-plugin-vue-i18n allows you to specify options in the plugin option to support bundling size optimization provided by vue-i18n.
+
+The same thing can be [configured](https://vue-i18n-next.intlify.dev/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags) with the `define` option, but the plugin option is more friendly. Especially if you are using typescript, you can use intelisense.
+
+About details, See the below section
+
 
 ## :wrench: Options
 
@@ -140,6 +153,35 @@ ja:
   ```
 
   Note `json` resources matches this option, it will be handled **before the internal json plugin of Vite, and will not be processed afterwards**, else the option doesn't match, the Vite side will handle.
+
+### `runtimeOnly`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Whether or not to use Vue I18n **runtime-only**, set in the `vue-i18n` field of Vite `alias` option.
+
+  If `false` is specified, Vue I18n (vue-i18n) package.json `module` field will be used.
+
+  For more details, See [here](https://vue-i18n-next.intlify.dev/advanced/optimization.html#improve-performance-and-reduce-bundle-size-with-runtime-build-only)
+
+### `compositionOnly`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Whether to make vue-i18n's API only composition API. **By default the legacy API is tree-shaken.**
+
+  For more details, See [here](https://vue-i18n-next.intlify.dev/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
+
+### `fullInstall`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Whether to install the full set of APIs, components, etc. provided by Vue I18n. By default, all of them will be installed.
+
+  If `false` is specified, **buld-in components and directive will not be installed in vue and will be tree-shaken.**
 
 ### `forceStringify`
 
