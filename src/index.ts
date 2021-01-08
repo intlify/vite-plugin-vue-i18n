@@ -28,9 +28,6 @@ function pluginI18n(
   debug('plugin options:', options)
 
   const filter = createFilter(options.include)
-  const runtimeOnly = isBoolean(options.runtimeOnly)
-    ? options.runtimeOnly
-    : true
   const compositionOnly = isBoolean(options.compositionOnly)
     ? options.compositionOnly
     : true
@@ -45,12 +42,6 @@ function pluginI18n(
     config() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const partialConfig: any = { define: {}, alias: {} }
-
-      if (runtimeOnly) {
-        partialConfig.alias['vue-i18n'] =
-          'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
-        debug('set vue-i18n alias')
-      }
 
       if (compositionOnly) {
         partialConfig.define['__VUE_I18N_LEGACY_API__'] = false
