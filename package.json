@@ -51,7 +51,6 @@
     "npm-run-all": "^4.1.5",
     "opener": "^1.5.2",
     "puppeteer": "^3.3.0",
-    "serve": "^11.3.2",
     "shipjs": "^0.23.0",
     "ts-jest": "^26.4.0",
     "typescript": "^4.1.3",
@@ -81,6 +80,7 @@
   "scripts": {
     "build": "tsc -p .",
     "build:example": "vite build --config ./examples/vite.config.ts --outDir ./examples/dist",
+    "dev": "vite examples --config ./examples/vite.config.ts",
     "dev:legacy": "vite examples/legacy --config ./examples/vite.config.ts",
     "dev:global": "vite examples/global --config ./examples/vite.config.ts",
     "dev:composition": "vite examples/composition --config ./examples/vite.config.ts",
@@ -96,9 +96,9 @@
     "lint:fix": "yarn lint --fix",
     "release:prepare": "shipjs prepare",
     "release:trigger": "shipjs trigger",
-    "test": "yarn lint && yarn test:cover",
+    "test": "yarn lint && yarn test:cover && yarn test:e2e",
     "test:cover": "yarn test:unit --coverage",
-    "test:e2e": "yarn build:example && jest --runInBand --config ./jest.e2e.config.js",
+    "test:e2e": "jest --runInBand --config ./jest.e2e.config.js",
     "test:unit": "jest --env node",
     "test:watch": "jest --env node --watch",
     "watch": "tsc -p . --watch"

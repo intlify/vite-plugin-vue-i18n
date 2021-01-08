@@ -1,9 +1,8 @@
 module.exports = {
   server: {
-    port: 3000,
+    port: 8080,
     launchTimeout: 10000,
-    command: 'serve ./examples -p 8080'
-    // command: `vite --port 8080`
+    command: 'npx vite examples --port 8080 -c examples/vite.config.ts'
   },
   launch: {
     dumpio: false,
