@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.9 (2021-01-08)
+
+#### :zap: Improvement Features
+* [#38](https://github.com/intlify/vite-plugin-vue-i18n/pull/38) improvement: module exporting ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.8 (2021-01-08)
 
 #### :zap: Improvement Features
