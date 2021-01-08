@@ -1,4 +1,16 @@
 
+## v1.0.0-beta.10 (2021-01-08)
+
+#### :star: Features
+* [#41](https://github.com/intlify/vite-plugin-vue-i18n/pull/41) feat: bundling optimizations ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improvement Features
+* [#40](https://github.com/intlify/vite-plugin-vue-i18n/pull/40) improvement: support named & default exporting ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.9 (2021-01-08)
 
 #### :zap: Improvement Features
