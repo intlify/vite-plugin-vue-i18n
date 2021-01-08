@@ -1,6 +1,16 @@
+;(async () => {
+  try {
+    await import('vue-i18n')
+  } catch (e) {
+    throw new Error(
+      '@intlify/vite-plugin-vue-i18n requires vue-i18n to be present in the dependency tree.'
+    )
+  }
+})()
+
 import { promises as fs } from 'fs'
 import path from 'path'
-import { isEmptyObject, isString } from '@intlify/shared'
+import { isBoolean, isEmptyObject, isString } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import { generateJSON, generateYAML } from '@intlify/cli'
 import { debug as Debug } from 'debug'
@@ -18,10 +28,41 @@ function pluginI18n(
   debug('plugin options:', options)
 
   const filter = createFilter(options.include)
+  const runtimeOnly = isBoolean(options.runtimeOnly)
+    ? options.runtimeOnly
+    : true
+  const compositionOnly = isBoolean(options.compositionOnly)
+    ? options.compositionOnly
+    : true
+  const fullIinstall = isBoolean(options.fullInstall)
+    ? options.fullInstall
+    : true
   let config: ResolvedConfig | null = null
 
   return {
     name: 'vite-plugin-vue-i18n',
+
+    config() {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const partialConfig: any = { define: {}, alias: {} }
+
+      if (runtimeOnly) {
+        partialConfig.alias['vue-i18n'] =
+          'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
+        debug('set vue-i18n alias')
+      }
+
+      if (compositionOnly) {
+        partialConfig.define['__VUE_I18N_LEGACY_API__'] = false
+        debug('set __VUE_I18N_LEGACY_API__ is `false`')
+      }
+      if (!fullIinstall) {
+        partialConfig.define['__VUE_I18N_FULL_INSTALL__'] = false
+        debug('set __VUE_I18N_FULL_INSTALL__ is `false`')
+      }
+
+      return partialConfig
+    },
 
     configResolved(_config: ResolvedConfig) {
       // store config
@@ -52,7 +93,7 @@ function pluginI18n(
 
     async transform(code: string, id: string) {
       const { filename, query } = parseVueRequest(id)
-      debug('transform', id, code, JSON.stringify(query))
+      debug('transform', id, JSON.stringify(query))
 
       const parseOptions = getOptions(
         filename,
