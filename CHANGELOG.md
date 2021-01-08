@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.11 (2021-01-08)
+
+#### :boom: Breaking Change
+* [#43](https://github.com/intlify/vite-plugin-vue-i18n/pull/43) breaking: remove runtimeOption ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.10 (2021-01-08)
 
 #### :star: Features
