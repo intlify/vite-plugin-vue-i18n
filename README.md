@@ -154,17 +154,6 @@ About details, See the below section
 
   Note `json` resources matches this option, it will be handled **before the internal json plugin of Vite, and will not be processed afterwards**, else the option doesn't match, the Vite side will handle.
 
-### `runtimeOnly`
-
-- **Type:** `boolean`
-- **Default:** `true`
-
-  Whether or not to use Vue I18n **runtime-only**, set in the `vue-i18n` field of Vite `alias` option.
-
-  If `false` is specified, Vue I18n (vue-i18n) package.json `module` field will be used.
-
-  For more details, See [here](https://vue-i18n-next.intlify.dev/advanced/optimization.html#improve-performance-and-reduce-bundle-size-with-runtime-build-only)
-
 ### `compositionOnly`
 
 - **Type:** `boolean`
