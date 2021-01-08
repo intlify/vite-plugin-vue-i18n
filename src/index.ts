@@ -12,7 +12,7 @@ import type { VitePluginVueI18nOptions } from './options'
 
 const debug = Debug('vite-plugin-vue-i18n')
 
-export function pluginI18n(
+function pluginI18n(
   options: VitePluginVueI18nOptions = { forceStringify: false }
 ): Plugin {
   debug('plugin options:', options)
@@ -157,3 +157,5 @@ function getOptions(
     })
   }
 }
+
+export const vueI18n = pluginI18n

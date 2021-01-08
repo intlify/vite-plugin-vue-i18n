@@ -41,15 +41,14 @@ the below example that `examples/composition/vite.config.ts`:
 
 ```ts
 import path from 'path'
-import Vue from '@vitejs/plugin-vue'
-import { VueI18n } from '@intlify/vite-plugin-vue-i18n'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { vueI18n } from '@intlify/vite-plugin-vue-i18n'
 
-import type { UserConfig } from 'vite'
-
-const config: UserConfig = {
+export default defineConfig({
   plugins: [
-    Vue(), // you need to install `@vitejs/plugin-vue`
-    VueI18n({
+    vue(), // you need to install `@vitejs/plugin-vue`
+    vueI18n({
       // you need to set i18n resource including paths !
       include: path.resolve(__dirname, './path/to/src/locales/**')
     })
