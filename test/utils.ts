@@ -3,7 +3,7 @@ import path from 'path'
 import { build } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { JSDOM, VirtualConsole } from 'jsdom'
-import { vueI18n } from '../src/index'
+import vueI18n from '../src/index'
 
 async function bundle(fixture: string, options: Record<string, unknown> = {}) {
   const input = (options.input as string) || './fixtures/entry.ts'
