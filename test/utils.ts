@@ -3,7 +3,7 @@ import path from 'path'
 import { build } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { JSDOM, VirtualConsole } from 'jsdom'
-import { pluginI18n } from '../src/index'
+import { vueI18n } from '../src/index'
 
 async function bundle(fixture: string, options: Record<string, unknown> = {}) {
   const input = (options.input as string) || './fixtures/entry.ts'
@@ -20,7 +20,7 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
       '~target': path.resolve(__dirname, target, fixture),
       vue: 'vue/dist/vue.runtime.esm-browser.js'
     },
-    plugins: [vue(), pluginI18n({ include })],
+    plugins: [vue(), vueI18n({ include })],
     build: {
       write: false,
       minify: false,
