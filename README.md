@@ -133,10 +133,10 @@ ja:
   A [minimatch](https://github.com/isaacs/minimatch) pattern, or array of patterns, you can specify a path to pre-compile i18n resources files. The extensions of i18n resources to be precompiled are as follows:
 
   ```
-  - `json`
-  - `json5`
-  - `yaml`
-  - `yml`
+  - json
+  - json5
+  - yaml
+  - yml
   ```
 
   Note `json` resources matches this option, it will be handled **before the internal json plugin of Vite, and will not be processed afterwards**, else the option doesn't match, the Vite side will handle.
