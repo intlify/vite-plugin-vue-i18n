@@ -58,9 +58,7 @@ export default defineConfig({
       include: path.resolve(__dirname, './path/to/src/locales/**')
     })
   ]
-}
-
-export default config
+})
 ```
 
 ### i18n custom block
