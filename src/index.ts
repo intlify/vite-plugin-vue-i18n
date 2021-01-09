@@ -16,7 +16,7 @@ import { generateJSON, generateYAML } from '@intlify/cli'
 import { debug as Debug } from 'debug'
 import { parseVueRequest } from './query'
 
-import type { Plugin, ResolvedConfig } from 'vite'
+import { normalizePath, Plugin, ResolvedConfig } from 'vite'
 import type { CodeGenOptions, DevEnv } from '@intlify/cli'
 import type { VitePluginVueI18nOptions } from './options'
 
@@ -27,7 +27,17 @@ function pluginI18n(
 ): Plugin {
   debug('plugin options:', options)
 
-  const filter = createFilter(options.include)
+  // use `normalizePath` for `options.include`
+  let include = options.include
+  if (include) {
+    if (Array.isArray(include)) {
+      include = include.map(item => normalizePath(item))
+    } else if (typeof include === 'string') {
+      include = normalizePath(include)
+    }
+  }
+
+  const filter = createFilter(include)
   const compositionOnly = isBoolean(options.compositionOnly)
     ? options.compositionOnly
     : true
