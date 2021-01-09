@@ -10,13 +10,14 @@
 
 import { promises as fs } from 'fs'
 import path from 'path'
-import { isBoolean, isEmptyObject, isString } from '@intlify/shared'
+import { isArray, isBoolean, isEmptyObject, isString } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import { generateJSON, generateYAML } from '@intlify/cli'
 import { debug as Debug } from 'debug'
 import { parseVueRequest } from './query'
+import { normalizePath } from 'vite'
 
-import { normalizePath, Plugin, ResolvedConfig } from 'vite'
+import type { Plugin, ResolvedConfig } from 'vite'
 import type { CodeGenOptions, DevEnv } from '@intlify/cli'
 import type { VitePluginVueI18nOptions } from './options'
 
@@ -30,9 +31,9 @@ function pluginI18n(
   // use `normalizePath` for `options.include`
   let include = options.include
   if (include) {
-    if (Array.isArray(include)) {
+    if (isArray(include)) {
       include = include.map(item => normalizePath(item))
-    } else if (typeof include === 'string') {
+    } else if (isString(include)) {
       include = normalizePath(include)
     }
   }
