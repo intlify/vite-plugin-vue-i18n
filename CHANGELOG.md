@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.12 (2021-01-09)
+
+#### :bug: Bug Fixes
+* [#45](https://github.com/intlify/vite-plugin-vue-i18n/pull/45) Fix test fail on windows ([@PeterAlfredLee](https://github.com/PeterAlfredLee))
+
+#### Committers: 1
+- Lee ([@PeterAlfredLee](https://github.com/PeterAlfredLee))
+
+
 ## v1.0.0-beta.11 (2021-01-08)
 
 #### :boom: Breaking Change
