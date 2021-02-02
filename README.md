@@ -125,16 +125,28 @@ ja:
 </i18n>
 ```
 
-### Bundling optimizations
+### Bundle optimizations
 
-vite-plugin-vue-i18n allows you to specify options in the plugin option to support bundling size optimization provided by vue-i18n.
+vite-plugin-vue-i18n allows you to support bundle size optimization provided by vue-i18n.
+
+## :package: Automatic Vue I18n bundling
+
+As noted [here](https://vue-i18n.intlify.dev/installation.html#explanation-of-different-builds), NPM provides many different builds of Vue I18n.
+
+vite-plugin-vue-i18n will automatically select and bundle Vue I18n build according to the following vite behavior:
+
+- vite dev: `vue-i18n.esm-bundler.js`
+- vite build: `vue-i18n.runtime.esm-bundler.js`
+
+About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#improve-performance-and-reduce-bundle-size-with-runtime-build-only)
+
+## :wrench: Options
+
+You can specify options in the plugin option to support bundle size optimization provided by vue-i18n.
 
 The same thing can be [configured](https://vue-i18n-next.intlify.dev/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags) with the `define` option, but the plugin option is more friendly. Especially if you are using typescript, you can use intelisense.
 
 About details, See the below section
-
-
-## :wrench: Options
 
 ### `include`
 
@@ -169,6 +181,8 @@ About details, See the below section
   Whether to install the full set of APIs, components, etc. provided by Vue I18n. By default, all of them will be installed.
 
   If `false` is specified, **buld-in components and directive will not be installed in vue and will be tree-shaken.**
+
+  For more details, See [here](https://vue-i18n-next.intlify.dev/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
 
 ### `forceStringify`
 

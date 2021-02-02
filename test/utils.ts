@@ -8,7 +8,9 @@ import vueI18n from '../src/index'
 async function bundle(fixture: string, options: Record<string, unknown> = {}) {
   const input = (options.input as string) || './fixtures/entry.ts'
   const target = (options.target as string) || './fixtures'
-  const include = (options.include as string[]) || []
+  const include = (options.include as string[]) || [
+    path.resolve(__dirname, './fixtures/**')
+  ]
   const silent = isBoolean(options.silent)
     ? options.silent === false
       ? 'info'

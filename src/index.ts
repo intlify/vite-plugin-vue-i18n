@@ -78,7 +78,7 @@ function pluginI18n(
       config = _config
 
       // json transform handling
-      const jsonPlugin = config.plugins.find(p => p.name === 'json')
+      const jsonPlugin = config.plugins.find(p => p.name === 'vite:json')
       if (jsonPlugin) {
         const orgTransform = jsonPlugin.transform // backup @rollup/plugin-json
         jsonPlugin.transform = async function (code: string, id: string) {
