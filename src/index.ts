@@ -38,6 +38,7 @@ function pluginI18n(
     }
   }
 
+  const env = process.env.NODE_ENV || 'development'
   const filter = createFilter(include)
   const compositionOnly = isBoolean(options.compositionOnly)
     ? options.compositionOnly
@@ -53,6 +54,12 @@ function pluginI18n(
     config() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const partialConfig: any = { define: {}, alias: {} }
+
+      if (env === 'production') {
+        partialConfig.alias['vue-i18n'] =
+          'node_modules/vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
+        debug('set vue-i18n runtime only')
+      }
 
       if (compositionOnly) {
         partialConfig.define['__VUE_I18N_LEGACY_API__'] = false
