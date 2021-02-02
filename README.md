@@ -144,7 +144,7 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
 You can specify options in the plugin option to support bundle size optimization provided by vue-i18n.
 
-The same thing can be [configured](https://vue-i18n-next.intlify.dev/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags) with the `define` option, but the plugin option is more friendly. Especially if you are using typescript, you can use intelisense.
+The same thing can be [configured](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags) with the `define` option, but the plugin option is more friendly. Especially if you are using typescript, you can use intelisense.
 
 About details, See the below section
 
@@ -171,7 +171,7 @@ About details, See the below section
 
   Whether to make vue-i18n's API only composition API. **By default the legacy API is tree-shaken.**
 
-  For more details, See [here](https://vue-i18n-next.intlify.dev/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
+  For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
 
 ### `fullInstall`
 
@@ -182,7 +182,7 @@ About details, See the below section
 
   If `false` is specified, **buld-in components and directive will not be installed in vue and will be tree-shaken.**
 
-  For more details, See [here](https://vue-i18n-next.intlify.dev/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
+  For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
 
 ### `forceStringify`
 
