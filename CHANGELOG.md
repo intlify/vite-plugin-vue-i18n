@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.13 (2021-02-02)
+
+#### :star: Features
+* [#48](https://github.com/intlify/vite-plugin-vue-i18n/pull/48) feat: vue-i18n dist module optimization ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.12 (2021-01-09)
 
 #### :bug: Bug Fixes
