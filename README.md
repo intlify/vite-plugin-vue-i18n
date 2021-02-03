@@ -9,6 +9,7 @@ Vite plugin for Vue I18n
 ## :star: Features
 - i18n resources pre-compilation
 - i18n custom block
+- Static bundle importing
 - Bundling optimizations
 
 ## :cd: Installation
