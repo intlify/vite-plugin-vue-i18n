@@ -24,7 +24,7 @@
     }
   },
   "dependencies": {
-    "@intlify/cli": "^0.1.2",
+    "@intlify/cli": "^0.2.0",
     "@intlify/shared": "^9.0.0-beta.16",
     "@rollup/pluginutils": "^4.1.0"
   },
@@ -43,6 +43,7 @@
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-vue": "^7.3.0",
     "eslint-plugin-vue-libs": "^4.0.0",
+    "fast-glob": "^3.2.5",
     "jest": "^26.6.3",
     "jest-puppeteer": "^4.4.0",
     "jest-watch-typeahead": "^0.6.1",

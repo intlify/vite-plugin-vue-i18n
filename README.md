@@ -125,6 +125,56 @@ ja:
 </i18n>
 ```
 
+### Static bundle importing
+
+vite-plugin-vue-i18n allows you to statically bundle i18n resources such as `json` or `yaml` specified by the [`include` option](#include) of the plugin described below as locale messages with the `import` syntax.
+
+In this case, only one i18n resource can be statically bundled at a time with `import` syntax, so the these code will be redundant for multiple locales.
+
+```js
+import { createApp } from 'vue'
+import { createI18n } from 'vue-i18n'
+/*
+ * The i18n resources in the path specified in the plugin `include` option can be read
+ * as vue-i18n optimized locale messages using the import syntax
+ */
+import en from './src/locales/en.json'
+import ja from './src/locales/ja.yaml'
+import fr from './src/locales/fr.json5'
+
+const i18n = createI18n({
+  locale: 'en',
+  messages: {
+    en,
+    ja,
+    fr
+  }
+})
+
+const app = createApp()
+app.use(i18n).mount('#app)
+```
+
+vite-plugin-vue-i18n can use the vite (rollup) mechanism to import all locales at once, using the special identifier `@intlify/vite-plugin-vue-i18n/messages`, as the bellow:
+
+```js
+import { createApp } from 'vue'
+import { createI18n } from 'vue-i18n'
+/*
+ * All i18n resources specified in the plugin `include` option can be loaded
+ * at once using the import syntax
+ */
+import messages from '@intlify/vite-plugin-vue-i18n/messages'
+
+const i18n = createI18n({
+  locale: 'en',
+  messages
+})
+
+const app = createApp()
+app.use(i18n).mount('#app)
+```
+
 ### Bundle optimizations
 
 vite-plugin-vue-i18n allows you to support bundle size optimization provided by vue-i18n.
