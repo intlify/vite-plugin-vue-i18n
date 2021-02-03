@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.14 (2021-02-03)
+
+#### :star: Features
+* [#50](https://github.com/intlify/vite-plugin-vue-i18n/pull/50) feat: static bundle importing ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.13 (2021-02-02)
 
 #### :star: Features
