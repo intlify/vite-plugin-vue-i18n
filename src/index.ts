@@ -13,6 +13,7 @@ import path from 'path'
 import { isArray, isBoolean, isEmptyObject, isString } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import { generateJSON, generateYAML } from '@intlify/cli'
+import fg from 'fast-glob'
 import { debug as Debug } from 'debug'
 import { parseVueRequest } from './query'
 import { normalizePath } from 'vite'
@@ -22,6 +23,8 @@ import type { CodeGenOptions, DevEnv } from '@intlify/cli'
 import type { VitePluginVueI18nOptions } from './options'
 
 const debug = Debug('vite-plugin-vue-i18n')
+
+const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/vite-plugin-vue-i18n/messages'
 
 function pluginI18n(
   options: VitePluginVueI18nOptions = { forceStringify: false }
@@ -100,6 +103,30 @@ function pluginI18n(
       }
     },
 
+    resolveId(id: string) {
+      if (id === INTLIFY_BUNDLE_IMPORT_ID) {
+        return id
+      }
+    },
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    async load(id: string, ssr: boolean) {
+      if (id === INTLIFY_BUNDLE_IMPORT_ID && include) {
+        let resourcePaths = [] as string[]
+        const includePaths = isArray(include) ? include : [include]
+        for (const inc of includePaths) {
+          resourcePaths = [...(await fg(inc))]
+        }
+        // TODO: source-map
+        const code = await generateBundleResources(
+          resourcePaths,
+          config != null ? config.isProduction : false,
+          options.forceStringify!
+        )
+        return Promise.resolve(code)
+      }
+    },
+
     async transform(code: string, id: string) {
       const { filename, query } = parseVueRequest(id)
       debug('transform', id, JSON.stringify(query))
@@ -120,7 +147,7 @@ function pluginI18n(
           // `.json` is handled default in vite, and it's transformed to JS object.
           let _source = code
           if (langInfo === '.json') {
-            _source = await getRawJSON(id)
+            _source = await getRaw(id)
           }
           const generate = /\.?json5?/.test(langInfo)
             ? generateJSON
@@ -159,7 +186,7 @@ function pluginI18n(
   }
 }
 
-async function getRawJSON(path: string): Promise<string> {
+async function getRaw(path: string): Promise<string> {
   return fs.readFile(path, { encoding: 'utf-8' })
 }
 
@@ -206,6 +233,35 @@ function getOptions(
       isGlobal: false
     })
   }
+}
+
+async function generateBundleResources(
+  resources: string[],
+  isProduction: boolean,
+  forceStringify: boolean
+) {
+  const codes = []
+  for (const res of resources) {
+    debug(`${res} bundle loading ...`)
+    if (/\.(json5?|ya?ml)$/.test(res)) {
+      const { ext, name } = path.parse(res)
+      const source = await getRaw(res)
+      const generate = /json5?/.test(ext) ? generateJSON : generateYAML
+      const parseOptions = getOptions(
+        res,
+        isProduction,
+        {},
+        forceStringify
+      ) as CodeGenOptions
+      parseOptions.type = 'bare'
+      const { code } = generate(source, parseOptions)
+      debug('generated code', code)
+      codes.push(`${JSON.stringify(name)}: ${code}`)
+    }
+  }
+  return `export default {
+  ${codes.join(`,\n`)}
+}`
 }
 
 // overwrite for cjs require('...')() usage

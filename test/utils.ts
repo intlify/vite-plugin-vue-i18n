@@ -16,12 +16,17 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
       ? 'info'
       : 'silent'
     : 'silent'
+
+  const alias: Record<string, string> = {
+    vue: 'vue/dist/vue.runtime.esm-browser.js'
+  }
+  if (!fixture.startsWith('@')) {
+    alias['~target'] = path.resolve(__dirname, target, fixture)
+  }
+
   const result = await build({
     logLevel: silent,
-    alias: {
-      '~target': path.resolve(__dirname, target, fixture),
-      vue: 'vue/dist/vue.runtime.esm-browser.js'
-    },
+    alias,
     plugins: [vue(), vueI18n({ include })],
     build: {
       write: false,
