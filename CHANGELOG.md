@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.15 (2021-02-05)
+
+#### :bug: Bug Fixes
+* [#53](https://github.com/intlify/vite-plugin-vue-i18n/pull/53) fix: cannot install fast-glob ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.14 (2021-02-03)
 
 #### :star: Features
