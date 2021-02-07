@@ -60,7 +60,7 @@ function pluginI18n(
 
       if (env === 'production') {
         partialConfig.alias['vue-i18n'] =
-          'node_modules/vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
+          'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
         debug('set vue-i18n runtime only')
       }
 
