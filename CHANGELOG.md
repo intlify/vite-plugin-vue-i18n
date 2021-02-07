@@ -1,4 +1,16 @@
 
+## v1.0.0-beta.16 (2021-02-07)
+
+#### :star: Features
+* [#57](https://github.com/intlify/vite-plugin-vue-i18n/pull/57) feat: runtimeOnly option ([@kazupon](https://github.com/kazupon))
+
+#### :bug: Bug Fixes
+* [#56](https://github.com/intlify/vite-plugin-vue-i18n/pull/56) fix: cannot resolve vue-i18n runtime in monorepo ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v1.0.0-beta.15 (2021-02-05)
 
 #### :bug: Bug Fixes
