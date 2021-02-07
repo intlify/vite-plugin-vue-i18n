@@ -30,6 +30,7 @@ $ yarn add -D @intlify/vite-plugin-vue-i18n
 
 When this plugin is installed, Vue I18n can only use the Composition API, and if you want to use the Legacy API, you need to set the `compositionOnly` option to `false`.
 
+Also, if you do a production build with vite, Vue I18n will automatically bundle the runtime only module. If you need on-demand compilation with Message compiler, you need to set the `runtimeOnly` option to `false`.
 
 ## :rocket: Usage
 
@@ -214,6 +215,15 @@ About details, See the below section
   ```
 
   Note `json` resources matches this option, it will be handled **before the internal json plugin of Vite, and will not be processed afterwards**, else the option doesn't match, the Vite side will handle.
+
+### `runtimeOnly`
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Whether or not to automatically use Vue I18n **runtime-only** in production build, set in the `vue-i18n` field of Vite `alias` option.
+  If `false` is specified, Vue I18n (vue-i18n) package.json `module` field will be used.
+
+  For more details, See [here](#package-automatic-vue-i18n-bundling)
 
 ### `compositionOnly`
 

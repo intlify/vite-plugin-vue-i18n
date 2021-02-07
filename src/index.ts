@@ -43,6 +43,9 @@ function pluginI18n(
 
   const env = process.env.NODE_ENV || 'development'
   const filter = createFilter(include)
+  const runtimeOnly = isBoolean(options.runtimeOnly)
+    ? options.runtimeOnly
+    : true
   const compositionOnly = isBoolean(options.compositionOnly)
     ? options.compositionOnly
     : true
@@ -58,7 +61,7 @@ function pluginI18n(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const partialConfig: any = { define: {}, alias: {} }
 
-      if (env === 'production') {
+      if (env === 'production' && runtimeOnly) {
         partialConfig.alias['vue-i18n'] =
           'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
         debug('set vue-i18n runtime only')
