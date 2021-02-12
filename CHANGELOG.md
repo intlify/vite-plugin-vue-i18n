@@ -1,4 +1,13 @@
 
+## v1.0.0-beta.17 (2021-02-12)
+
+#### :zap: Improvement Features
+* [#59](https://github.com/intlify/vite-plugin-vue-i18n/pull/59) fix: alias changed to resolve.alias in latest vite ([@hannoeru](https://github.com/hannoeru))
+
+#### Committers: 1
+- Han（ハン） ([@hannoeru](https://github.com/hannoeru))
+
+
 ## v1.0.0-beta.16 (2021-02-07)
 
 #### :star: Features
