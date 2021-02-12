@@ -59,10 +59,15 @@ function pluginI18n(
 
     config() {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const partialConfig: any = { define: {}, alias: {} }
+      const partialConfig: any = {
+        define: {},
+        resolve: {
+          alias: {}
+        }
+      }
 
       if (env === 'production' && runtimeOnly) {
-        partialConfig.alias['vue-i18n'] =
+        partialConfig.resolve.alias['vue-i18n'] =
           'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
         debug('set vue-i18n runtime only')
       }

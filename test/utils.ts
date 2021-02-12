@@ -26,7 +26,9 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
 
   const result = await build({
     logLevel: silent,
-    alias,
+    resolve: {
+      alias
+    },
     plugins: [vue(), vueI18n({ include })],
     build: {
       write: false,
