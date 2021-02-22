@@ -1,4 +1,16 @@
 
+## v2.0.0-rc.2 (2021-02-22)
+
+#### :bug: Bug Fixes
+* [#64](https://github.com/intlify/vite-plugin-vue-i18n/pull/64) bug: fix cannot resolve.alias for array type ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improvement Features
+* [#65](https://github.com/intlify/vite-plugin-vue-i18n/pull/65) improvement: support client types ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 
 
 ## v1.0.0-beta.17 (2021-02-12)
