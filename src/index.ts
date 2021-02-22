@@ -18,7 +18,7 @@ import { debug as Debug } from 'debug'
 import { parseVueRequest } from './query'
 import { normalizePath } from 'vite'
 
-import type { Plugin, ResolvedConfig } from 'vite'
+import type { Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { CodeGenOptions, DevEnv } from '@intlify/cli'
 import type { VitePluginVueI18nOptions } from './options'
 
@@ -57,31 +57,33 @@ function pluginI18n(
   return {
     name: 'vite-plugin-vue-i18n',
 
-    config() {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const partialConfig: any = {
-        define: {},
-        resolve: {
-          alias: {}
-        }
-      }
-
+    config(config: UserConfig) {
       if (env === 'production' && runtimeOnly) {
-        partialConfig.resolve.alias['vue-i18n'] =
-          'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
+        normalizeConfigResolveAliias(config)
+        if (isArray(config.resolve!.alias)) {
+          config.resolve!.alias.push({
+            find: 'vue-i18n',
+            replacement: 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
+          })
+        } else {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ;(config.resolve!.alias as any)['vue-i18n'] =
+            'vue-i18n/dist/vue-i18n.runtime.esm-bundler.js'
+        }
         debug('set vue-i18n runtime only')
       }
 
       if (compositionOnly) {
-        partialConfig.define['__VUE_I18N_LEGACY_API__'] = false
+        config.define = config.define || {}
+        config.define['__VUE_I18N_LEGACY_API__'] = false
         debug('set __VUE_I18N_LEGACY_API__ is `false`')
       }
+
       if (!fullIinstall) {
-        partialConfig.define['__VUE_I18N_FULL_INSTALL__'] = false
+        config.define = config.define || {}
+        config.define['__VUE_I18N_FULL_INSTALL__'] = false
         debug('set __VUE_I18N_FULL_INSTALL__ is `false`')
       }
-
-      return partialConfig
     },
 
     configResolved(_config: ResolvedConfig) {
@@ -191,6 +193,18 @@ function pluginI18n(
         }
       }
     }
+  }
+}
+
+function normalizeConfigResolveAliias(config: UserConfig): void {
+  if (config.resolve?.alias) {
+    return
+  }
+
+  if (!config.resolve) {
+    config.resolve = { alias: [] }
+  } else if (!config.resolve.alias) {
+    config.resolve.alias = []
   }
 }
 
