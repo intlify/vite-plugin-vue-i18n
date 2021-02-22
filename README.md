@@ -180,6 +180,18 @@ const app = createApp()
 app.use(i18n).mount('#app)
 ```
 
+### Client Types
+
+If you want type definition of `@intlify/vite-plugin-vue-i18n/messages`, add `vite-plugin-vue-i18n/client` to `compilerOptions.types` of your tsconfig:
+
+```json
+{
+  "compilerOptions": {
+    "types": ["vite-plugin-vue-i18n/client"]
+  }
+}
+```
+
 ### Bundle optimizations
 
 vite-plugin-vue-i18n allows you to support bundle size optimization provided by vue-i18n.
