@@ -197,7 +197,8 @@ function pluginI18n(
 }
 
 function normalizeConfigResolveAliias(config: UserConfig): void {
-  if (config.resolve?.alias) {
+  // NOTE: cannot resolve Optional Chaining in jest E2E ...
+  if (config.resolve && config.resolve.alias) {
     return
   }
 
