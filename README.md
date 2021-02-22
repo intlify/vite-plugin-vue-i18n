@@ -187,7 +187,7 @@ If you want type definition of `@intlify/vite-plugin-vue-i18n/messages`, add `vi
 ```json
 {
   "compilerOptions": {
-    "types": ["vite-plugin-vue-i18n/client"]
+    "types": ["@intlify/vite-plugin-vue-i18n/client"]
   }
 }
 ```
