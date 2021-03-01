@@ -1,4 +1,13 @@
 
+## v2.0.0 (2021-03-01)
+
+#### :zap: Improvement Features
+* [#69](https://github.com/intlify/vite-plugin-vue-i18n/pull/69) upgrade deps ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.0.0-rc.2 (2021-02-22)
 
 #### :bug: Bug Fixes
