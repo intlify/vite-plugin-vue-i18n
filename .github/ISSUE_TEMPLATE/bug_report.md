@@ -16,8 +16,6 @@ assignees: ''
 **Module versions (please complete the following information):**
  - `@intlify/vite-plugin-vue-i18n`: 2.x
  - `vite`: 2.x
- - `vue-i18n`: 9.x
- - `vue`: 3.x
 
 **Reproduction Link**
 A minimal a GitHub reprository that can reproduce the bug.
