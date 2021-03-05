@@ -5,6 +5,8 @@ import vue from '@vitejs/plugin-vue'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import vueI18n from '../src/index'
 
+import type { InjectionValues } from '../src/injection'
+
 async function bundle(fixture: string, options: Record<string, unknown> = {}) {
   const input = (options.input as string) || './fixtures/entry.ts'
   const target = (options.target as string) || './fixtures'
@@ -24,12 +26,18 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
     alias['~target'] = path.resolve(__dirname, target, fixture)
   }
 
+  const plugins = [vue(), vueI18n({ include })]
+  if (options.intlify) {
+    const intlifyVue = (await import('../src/injection')).default
+    plugins.push(intlifyVue(options.intlify as InjectionValues))
+  }
+
   const result = await build({
     logLevel: silent,
     resolve: {
       alias
     },
-    plugins: [vue(), vueI18n({ include })],
+    plugins,
     build: {
       write: false,
       minify: false,
