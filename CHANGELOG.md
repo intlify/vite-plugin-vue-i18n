@@ -1,4 +1,13 @@
 
+## v2.0.1 (2021-03-05)
+
+#### :star: Features
+* [#71](https://github.com/intlify/vite-plugin-vue-i18n/pull/71) experimental: intlify meta info injection plugin ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.0.0 (2021-03-01)
 
 #### :zap: Improvement Features
