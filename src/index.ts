@@ -73,17 +73,18 @@ function pluginI18n(
         debug('set vue-i18n runtime only')
       }
 
-      if (compositionOnly) {
-        config.define = config.define || {}
-        config.define['__VUE_I18N_LEGACY_API__'] = false
-        debug('set __VUE_I18N_LEGACY_API__ is `false`')
-      }
+      config.define = config.define || {}
+      config.define['__VUE_I18N_LEGACY_API__'] = !compositionOnly
+      debug(
+        `set __VUE_I18N_LEGACY_API__ is '${config.define['__VUE_I18N_LEGACY_API__']}'`
+      )
 
-      if (!fullIinstall) {
-        config.define = config.define || {}
-        config.define['__VUE_I18N_FULL_INSTALL__'] = false
-        debug('set __VUE_I18N_FULL_INSTALL__ is `false`')
-      }
+      config.define['__VUE_I18N_FULL_INSTALL__'] = fullIinstall
+      debug(
+        `set __VUE_I18N_FULL_INSTALL__ is '${config.define['__VUE_I18N_FULL_INSTALL__']}'`
+      )
+
+      config.define['__INTLIFY_PROD_DEVTOOLS__'] = false
     },
 
     configResolved(_config: ResolvedConfig) {
