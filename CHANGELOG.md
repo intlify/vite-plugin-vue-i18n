@@ -1,4 +1,13 @@
 
+## v2.0.2 (2021-03-11)
+
+#### :bug: Bug Fixes
+* [#75](https://github.com/intlify/vite-plugin-vue-i18n/pull/75) fix: esm-bundler warning ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.0.1 (2021-03-05)
 
 #### :star: Features
