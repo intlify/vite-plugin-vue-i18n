@@ -27,6 +27,7 @@
     "@intlify/cli": "^0.2.0",
     "@intlify/shared": "^9.0.0",
     "@rollup/pluginutils": "^4.1.0",
+    "debug": "^4.1.1",
     "fast-glob": "^3.2.5"
   },
   "devDependencies": {
@@ -38,7 +39,6 @@
     "@typescript-eslint/parser": "^4.11.0",
     "@vitejs/plugin-vue": "^1.1.4",
     "@vue/compiler-sfc": "^3.0.5",
-    "debug": "^4.1.1",
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-prettier": "^3.3.0",
@@ -78,6 +78,9 @@
   ],
   "license": "MIT",
   "main": "lib/index.js",
+  "peerDependencies": {
+    "vite": "^2.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intlify/vite-plugin-vue-i18n.git"
