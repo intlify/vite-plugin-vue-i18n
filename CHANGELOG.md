@@ -1,4 +1,13 @@
 
+## v2.0.3 (2021-03-16)
+
+#### :zap: Improvement Features
+* [#77](https://github.com/intlify/vite-plugin-vue-i18n/pull/77) fix: move debug to dependencies, add vite peer dependency ([@lukashass](https://github.com/lukashass))
+
+#### Committers: 1
+- Lukas ([@lukashass](https://github.com/lukashass))
+
+
 ## v2.0.2 (2021-03-11)
 
 #### :bug: Bug Fixes
