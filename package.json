@@ -79,7 +79,8 @@
   "license": "MIT",
   "main": "lib/index.js",
   "peerDependencies": {
-    "vite": "^2.0.1"
+    "vite": "^2.0.1",
+    "vue-i18n": "^9.0.0"
   },
   "repository": {
     "type": "git",
