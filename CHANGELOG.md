@@ -1,4 +1,17 @@
 
+## v2.0.4 (2021-03-19)
+
+#### :bug: Bug Fixes
+* [#80](https://github.com/intlify/vite-plugin-vue-i18n/pull/80) fix: suppress console in production ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improvement Features
+* [#79](https://github.com/intlify/vite-plugin-vue-i18n/pull/79) fix: add vue-i18n peer dependency ([@lukashass](https://github.com/lukashass))
+
+#### Committers: 2
+- Lukas ([@lukashass](https://github.com/lukashass))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.0.3 (2021-03-16)
 
 #### :zap: Improvement Features
