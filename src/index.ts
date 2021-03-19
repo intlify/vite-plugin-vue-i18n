@@ -41,7 +41,6 @@ function pluginI18n(
     }
   }
 
-  const env = process.env.NODE_ENV || 'development'
   const filter = createFilter(include)
   const runtimeOnly = isBoolean(options.runtimeOnly)
     ? options.runtimeOnly
@@ -57,8 +56,8 @@ function pluginI18n(
   return {
     name: 'vite-plugin-vue-i18n',
 
-    config(config: UserConfig) {
-      if (env === 'production' && runtimeOnly) {
+    config(config: UserConfig, { command }) {
+      if (command === 'build' && runtimeOnly) {
         normalizeConfigResolveAliias(config)
         if (isArray(config.resolve!.alias)) {
           config.resolve!.alias.push({
