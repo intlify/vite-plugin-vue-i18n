@@ -1,4 +1,13 @@
 
+## v2.1.0 (2021-04-07)
+
+#### :star: Features
+* [#84](https://github.com/intlify/vite-plugin-vue-i18n/pull/84) feat: support vue-i18n v9.1 ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.0.4 (2021-03-19)
 
 #### :bug: Bug Fixes
