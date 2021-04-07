@@ -83,7 +83,7 @@ function pluginI18n(
         `set __VUE_I18N_FULL_INSTALL__ is '${config.define['__VUE_I18N_FULL_INSTALL__']}'`
       )
 
-      config.define['__INTLIFY_PROD_DEVTOOLS__'] = false
+      config.define['__VUE_I18N_PROD_DEVTOOLS__'] = false
     },
 
     configResolved(_config: ResolvedConfig) {
