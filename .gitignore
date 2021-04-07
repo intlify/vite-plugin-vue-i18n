@@ -5,5 +5,5 @@ lib
 *.log
 *.swp
 *~
-.vscode
 examples/**/dist
+.env
