@@ -1,4 +1,13 @@
 
+## v2.1.1 (2021-04-08)
+
+#### :zap: Improvement Features
+* [#87](https://github.com/intlify/vite-plugin-vue-i18n/pull/87) improvement: tweak warning message ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.1.0 (2021-04-07)
 
 #### :star: Features
