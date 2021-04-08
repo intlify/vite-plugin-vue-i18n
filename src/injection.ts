@@ -10,7 +10,7 @@ const debug = Debug('vite-plugin-vue-i18n:intlify-vue')
 export type InjectionValues = Record<string, any>
 
 console.warn(
-  `[@intlify/vite-i18n-vue-i18n] IntlifyVue plugin is experimental! This plugin is used for Intlify tools. Don't use this plugin to enhancement Component options of your application.`
+  `[@intlify/vite-i18n-vue-i18n] IntlifyVue plugin is experimental! This plugin is used for Intlify Devtools. Don't use this plugin to enhancement Component options of your application.`
 )
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
