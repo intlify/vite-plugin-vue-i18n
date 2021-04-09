@@ -30,19 +30,6 @@ Intlify Project is an open source project that is included Vue I18n and i18n too
   </a>
 </p>
 
-<h3 align="center">🥈 Silver Sponsors</h3>
-
-<p align="center">
-  <a
-    href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" 
-    target="_blank">
-    <img
-      src="https://secure.codeandweb.com/static/babeledit.svg"
-      width="200px"
-    />
-  </a>
-</p>
-
 <h3 align="center">🥉 Bronze Sponsors</h3>
 
 <p align="center">
@@ -72,8 +59,8 @@ Intlify Project is an open source project that is included Vue I18n and i18n too
 
 <br/>
 
-
 ## :star: Features
+
 - i18n resources pre-compilation
 - i18n custom block
 - Static bundle importing
@@ -191,9 +178,9 @@ example `yaml` foramt:
 ```vue
 <i18n lang="yaml">
 en:
-  hello: "Hello World!"
+  hello: 'Hello World!'
 ja:
-  hello: "こんにちは、世界！"
+  hello: 'こんにちは、世界！'
 </i18n>
 ```
 
@@ -299,6 +286,7 @@ About details, See the below section
   Note `json` resources matches this option, it will be handled **before the internal json plugin of Vite, and will not be processed afterwards**, else the option doesn't match, the Vite side will handle.
 
 ### `runtimeOnly`
+
 - **Type:** `boolean`
 - **Default:** `true`
 
@@ -349,21 +337,48 @@ About details, See the below section
 
   ```js
   export default {
-    "trueValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["true"])};fn.source="true";return fn;})(),
-    "falseValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["false"])};fn.source="false";return fn;})(),
-    "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
-    "numberValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})()
+    trueValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['true'])
+      }
+      fn.source = 'true'
+      return fn
+    })(),
+    falseValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['false'])
+      }
+      fn.source = 'false'
+      return fn
+    })(),
+    nullValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['null'])
+      }
+      fn.source = 'null'
+      return fn
+    })(),
+    numberValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['1'])
+      }
+      fn.source = '1'
+      return fn
+    })()
   }
   ```
 
-
 ## :scroll: Changelog
+
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/vite-plugin-vue-i18n/blob/master/CHANGELOG.md).
 
-
 ## :exclamation: Issues
-Please make sure to read the [Issue Reporting Checklist](https://github.com/inlitify/vite-plugin-vue-i18n/blob/master/.github/CONTRIBUTING.md#issue-reporting-guidelines) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
 
+Please make sure to read the [Issue Reporting Checklist](https://github.com/inlitify/vite-plugin-vue-i18n/blob/master/.github/CONTRIBUTING.md#issue-reporting-guidelines) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
 
 ## :copyright: License
 
