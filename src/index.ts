@@ -230,7 +230,7 @@ function getOptions(
   query: Record<string, unknown>,
   forceStringify = false
 ): Record<string, unknown> {
-  const mode: DevEnv = isProduction ? 'production' : 'production'
+  const mode: DevEnv = isProduction ? 'production' : 'development'
 
   const baseOptions = {
     filename,
