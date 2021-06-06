@@ -1,4 +1,16 @@
 
+## v2.2.0 (2021-06-06)
+
+#### :bug: Bug Fixes
+* [#103](https://github.com/intlify/vite-plugin-vue-i18n/pull/103) fix HMR for Static bundle importing resources ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improvement Features
+* [#104](https://github.com/intlify/vite-plugin-vue-i18n/pull/104) improve `@intlify/vite-plugin-vue-i18n/messages` typing ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.1.2 (2021-04-09)
 
 #### :bug: Bug Fixes
