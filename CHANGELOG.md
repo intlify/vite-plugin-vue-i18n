@@ -1,4 +1,13 @@
 
+## v2.2.1 (2021-06-07)
+
+#### :zap: Improvement Features
+* [#106](https://github.com/intlify/vite-plugin-vue-i18n/pull/106) improve client type ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.2.0 (2021-06-06)
 
 #### :bug: Bug Fixes
