@@ -127,3 +127,12 @@ test('default lang and global scope', async () => {
     'hello from defaults!'
   )
 })
+
+test('global scope and import', async () => {
+  const { module } = await bundleAndRun('global-scope-import.vue', {
+    globalSFCScope: true
+  })
+  expect(module.__i18nGlobal).toMatchSnapshot()
+  const g = module.__i18nGlobal.pop()
+  expect(g.resource.en.hello(createMessageContext())).toEqual('hello world!')
+})
