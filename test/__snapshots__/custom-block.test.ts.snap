@@ -63,6 +63,19 @@ Array [
 ]
 `;
 
+exports[`global scope and import 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
 exports[`import 1`] = `
 Array [
   Object {
