@@ -13,6 +13,32 @@ Array [
 ]
 `;
 
+exports[`default lang 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
+exports[`default lang and global scope 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
 exports[`global 1`] = `
 Array [
   Object {
