@@ -253,7 +253,7 @@ function getOptions(
   filename: string,
   isProduction: boolean,
   query: Record<string, unknown>,
-  forceStringify = false,
+  forceStringify = false
 ): Record<string, unknown> {
   const mode: DevEnv = isProduction ? 'production' : 'development'
 
