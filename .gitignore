@@ -7,3 +7,5 @@ lib
 *~
 examples/**/dist
 .env
+# intellij/webstorm stuff
+.idea/
