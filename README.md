@@ -389,6 +389,8 @@ About details, See the below section
   - yml
   ```
 
+  On inlined `i18n` custom blocks that have specified the `lang` attribute, the `defaultSFCLang` is not applied.
+
   For example, with `defaultSFCLang: "yaml"` or `defaultSFCLang: "yml"`, this custom block:
   ```html
   <i18n lang="yaml">
@@ -417,6 +419,8 @@ About details, See the below section
   Whether to include all `i18n` custom blocks on your `SFC` on `global` scope.
 
   If `true`, it will be applied to all inlined `i18n` or `imported` custom blocks.
+
+  **Warning**: beware enabling `globalSFCScope: true`, all `i18n` custom blocks in all your `SFC` will be on `global` scope.
 
   For example, with `globalSFCScope: true`, this custom block:
 
